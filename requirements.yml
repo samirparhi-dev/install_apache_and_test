@@ -1,0 +1,11 @@
+---
+roles:
+  - name: check_folders
+    src: https://github.com/example-org/check_folders
+    scm: git
+    version: main
+
+  - name: install_tar
+    src: https://github.com/example-org/install_tar
+    scm: git
+    version: main
