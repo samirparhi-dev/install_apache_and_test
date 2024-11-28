@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: ../../requirements.yml  # Ensure external roles are pulled
+
+driver:
+  name: docker
+
+platforms:
+  - name: instance
+    image: geerlingguy/docker-ubuntu2004-ansible  # Ubuntu image with Ansible pre-installed
+    privileged: true
+
+provisioner:
+  name: ansible
+
+scenario:
+  test_sequence:
+    - prepare
+    - converge
+    - verify

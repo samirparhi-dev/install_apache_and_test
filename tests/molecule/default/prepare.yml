@@ -1,0 +1,8 @@
+---
+- name: Prepare system for testing
+  hosts: all
+  tasks:
+    - name: Install tar if missing
+      ansible.builtin.yum:
+        name: tar
+        state: present

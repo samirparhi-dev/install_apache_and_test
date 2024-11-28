@@ -1,0 +1,9 @@
+folders_to_check:
+  - path: /user/ache
+    permissions: "0755"
+  - path: /var/www/html
+    permissions: "0700"
+  - path: /tmp/myfolder
+    permissions: "0777"
+apache_tar_file: apache.tar.gz
+apache_folder: /user/ache

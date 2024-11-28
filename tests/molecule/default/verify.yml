@@ -1,0 +1,30 @@
+---
+- name: Verify folders and permissions
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Check all folders
+      ansible.builtin.debug:
+        msg: "Checking folder {{ item.path }} with permissions {{ item.permissions }}"
+      with_items: "{{ folders_to_check }}"
+
+    - name: Assert folder exists
+      ansible.builtin.stat:
+        path: "{{ item.path }}"
+      register: folder_stat
+      with_items: "{{ folders_to_check }}"
+
+    - name: Fail if folder does not exist
+      ansible.builtin.fail:
+        msg: "Folder {{ item.item.path }} does not exist"
+      when: not folder_stat.results[item_index].stat.exists
+      loop_control:
+        index_var: item_index
+
+    - name: Assert correct permissions
+      ansible.builtin.assert:
+        that:
+          - folder_stat.results[item_index].stat.mode == item.item.permissions
+        fail_msg: "Folder {{ item.item.path }} permissions are incorrect"
+      loop_control:
+        index_var: item_index

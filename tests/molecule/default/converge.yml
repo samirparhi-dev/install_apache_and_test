@@ -1,0 +1,5 @@
+---
+- name: Apply the install_apache role
+  hosts: all
+  roles:
+    - role: install_apache

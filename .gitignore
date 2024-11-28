@@ -1,5 +1,4 @@
  # Ignore everything in roles dir
-/*
 # Except:
 # the .gitignore file
 !.gitignore

@@ -1,0 +1,26 @@
+---
+---
+- name: Call check_folders role
+  ansible.builtin.include_role:
+    name: check_folders
+  vars:
+    additional_folders_to_check: "{{ folders_to_check }}"
+
+- name: Download and install TAR using the install_tar role
+  include_role:
+    name: install_tar
+  vars:
+    tar_file: "{{ apache_tar_file }}"
+    destination_folder: "{{ apache_folder }}"
+
+- name: Install Apache
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Start and enable Apache
+  ansible.builtin.service:
+    name: httpd
+    state: started
+    enabled: true
